@@ -1,18 +1,30 @@
 import { UserProfile } from '../types/profile';
-import { AssessmentId } from '../types/assessment';
 
-const QUESTION_COUNTS = { personality: 50, relationship: 32, communication: 28 } as const;
+const QUESTION_COUNTS = {
+  type: 32,
+  personality: 50,
+  relationship: 32,
+  communication: 28,
+} as const;
 
-// Points awarded for completing each assessment (sum = 100)
-const COMPLETE_POINTS = { personality: 35, relationship: 33, communication: 32 } as const;
+const COMPLETE_POINTS = {
+  type: 25,
+  personality: 25,
+  relationship: 25,
+  communication: 25,
+} as const;
 
-// Max points for a partially-completed assessment (proportional to answers given)
-const PARTIAL_POINTS = { personality: 28, relationship: 26, communication: 25 } as const;
+const PARTIAL_POINTS = {
+  type: 20,
+  personality: 20,
+  relationship: 20,
+  communication: 20,
+} as const;
 
 export function calculateProfileClarity(profile: UserProfile): number {
   let clarity = 0;
 
-  const ids = ['personality', 'relationship', 'communication'] as const;
+  const ids = ['type', 'personality', 'relationship', 'communication'] as const;
   for (const id of ids) {
     const result = profile.assessmentResults[id];
     const progress = profile.assessmentProgress[id];
@@ -28,13 +40,11 @@ export function calculateProfileClarity(profile: UserProfile): number {
   return Math.min(100, clarity);
 }
 
-// Compute clarity for a live-updating assessment (pass current answer count)
 export function calculateLiveClarity(
   profile: UserProfile,
-  assessmentId: AssessmentId,
+  assessmentId: 'type' | 'personality' | 'relationship' | 'communication',
   currentAnswerCount: number
 ): number {
-  // Override the progress for the current assessment with live count
   const fakeProgress = {
     assessmentId,
     currentQuestionIndex: currentAnswerCount,
@@ -49,7 +59,6 @@ export function calculateLiveClarity(
       ...profile.assessmentProgress,
       [assessmentId]: fakeProgress,
     },
-    // Remove result for this assessment so the partial path is used
     assessmentResults: { ...profile.assessmentResults, [assessmentId]: undefined },
   } as UserProfile;
   return calculateProfileClarity(fakeProfile);
