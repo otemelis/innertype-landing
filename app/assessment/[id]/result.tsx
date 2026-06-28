@@ -276,6 +276,20 @@ export default function ResultScreen() {
                 </Text>
               </View>
 
+              {/* Personality type: show 4-letter code prominently */}
+              {id === 'type' && result.primaryType && (
+                <View style={styles.typeHeroBlock}>
+                  <Text style={[styles.typeHeroCode, { color: accentColor }]}>
+                    {result.primaryType}
+                  </Text>
+                  <View style={[styles.typeHeroPill, { borderColor: `${accentColor}40`, backgroundColor: `${accentColor}10` }]}>
+                    <Text style={[styles.typeHeroPillText, { color: accentColor }]}>
+                      {result.primaryType}-style pattern
+                    </Text>
+                  </View>
+                </View>
+              )}
+
               {/* Title */}
               <Text style={styles.heroName}>{result.archetypeLabel}</Text>
               <Text style={styles.heroTagline}>{result.archetypeTagline}</Text>
@@ -294,8 +308,8 @@ export default function ResultScreen() {
               {/* Confidence */}
               <ConfidenceBadge level={result.confidence} />
 
-              {/* Description — short lead-in only; full detail follows below */}
-              <Text style={styles.heroDescription} numberOfLines={4}>
+              {/* Description */}
+              <Text style={styles.heroDescription}>
                 {description}
               </Text>
             </View>
@@ -592,7 +606,33 @@ const styles = StyleSheet.create({
     lineHeight: FontSize.sm * 1.6,
   },
 
-  // ── Type code ──
+  // ── Type hero (prominent 4-letter code) ──
+  typeHeroBlock: {
+    alignItems: 'flex-start',
+    gap: 8,
+    marginBottom: 4,
+  },
+  typeHeroCode: {
+    fontSize: 56,
+    fontWeight: FontWeight.bold,
+    letterSpacing: -1.5,
+    lineHeight: 56,
+  },
+  typeHeroPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 20,
+    borderWidth: 1,
+  },
+  typeHeroPillText: {
+    fontSize: FontSize.xs,
+    fontWeight: FontWeight.semiBold,
+    letterSpacing: 0.5,
+  },
+
+  // ── Type code (in score bars section) ──
   typeCodeRow: {
     flexDirection: 'row',
     alignItems: 'center',

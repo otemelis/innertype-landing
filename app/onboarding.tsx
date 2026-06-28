@@ -347,21 +347,28 @@ function GoalStep({
         ))}
       </ScrollView>
 
-      <TouchableOpacity
-        onPress={onStart}
-        disabled={!selectedGoal || loading}
-        activeOpacity={0.85}
-        style={[styles.startButton, (!selectedGoal || loading) && { opacity: 0.4 }]}
-      >
+      <View style={styles.goalFooter}>
         <LinearGradient
-          colors={Colors.gradientGold}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 0 }}
-          style={[StyleSheet.absoluteFill, { borderRadius: 20 }]}
+          colors={['transparent', Colors.background]}
+          style={styles.goalFooterFade}
+          pointerEvents="none"
         />
-        <Text style={styles.startButtonText}>Start building my profile</Text>
-        <Ionicons name="arrow-forward" size={18} color={Colors.textInverse} />
-      </TouchableOpacity>
+        <TouchableOpacity
+          onPress={onStart}
+          disabled={!selectedGoal || loading}
+          activeOpacity={0.85}
+          style={[styles.startButton, (!selectedGoal || loading) && { opacity: 0.4 }]}
+        >
+          <LinearGradient
+            colors={Colors.gradientGold}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={[StyleSheet.absoluteFill, { borderRadius: 20 }]}
+          />
+          <Text style={styles.startButtonText}>Start building my profile</Text>
+          <Ionicons name="arrow-forward" size={18} color={Colors.textInverse} />
+        </TouchableOpacity>
+      </View>
     </Animated.View>
   );
 }
@@ -455,7 +462,7 @@ export default function Onboarding() {
       <SafeAreaView style={styles.safeArea}>
         {/* Orb — clarity evolves with each slide */}
         <View style={styles.orbArea}>
-          <ProfileOrb clarity={currentSlide.orbClarity} color={currentAccent} size={160} />
+          <ProfileOrb clarity={currentSlide.orbClarity} color={currentAccent} size={110} />
         </View>
 
         {/* Active slide — key prop causes remount + fresh fade-in animation */}
@@ -463,8 +470,13 @@ export default function Onboarding() {
           <SlideContent key={slideIndex} slide={currentSlide} />
         </View>
 
-        {/* Bottom controls */}
+        {/* Bottom controls — floats over content with gradient fade */}
         <View style={styles.controls}>
+          <LinearGradient
+            colors={['transparent', Colors.background]}
+            style={styles.controlsFade}
+            pointerEvents="none"
+          />
           {/* Progress dots */}
           <View style={styles.dots}>
             {SLIDES.map((_, i) => (
@@ -645,8 +657,8 @@ const styles = StyleSheet.create({
   // ── Slides ──────────────────────────────────────────────────────
   orbArea: {
     alignItems: 'center',
-    paddingTop: 24,
-    paddingBottom: 8,
+    paddingTop: 12,
+    paddingBottom: 4,
   },
   // slideArea fills remaining space between orb and controls
   slideArea: {
@@ -654,9 +666,9 @@ const styles = StyleSheet.create({
   },
   slideContent: {
     paddingHorizontal: 30,
-    paddingTop: 16,
-    paddingBottom: 12,
-    gap: 18,
+    paddingTop: 10,
+    paddingBottom: 120,
+    gap: 14,
   },
   overline: {
     fontSize: FontSize.xs,
@@ -680,8 +692,17 @@ const styles = StyleSheet.create({
   controls: {
     paddingHorizontal: 24,
     paddingBottom: Platform.OS === 'ios' ? 52 : 36,
+    paddingTop: 12,
     gap: 14,
     alignItems: 'center',
+    position: 'relative',
+  },
+  controlsFade: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    top: -56,
   },
   dots: {
     flexDirection: 'row',
@@ -791,7 +812,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 24,
     paddingTop: 32,
-    paddingBottom: Platform.OS === 'ios' ? 56 : 36,
+    paddingBottom: Platform.OS === 'ios' ? 40 : 28,
     gap: 18,
   },
   goalHeader: { gap: 10 },
@@ -855,6 +876,16 @@ const styles = StyleSheet.create({
     fontSize: FontSize.sm,
     color: Colors.textTertiary,
     lineHeight: FontSize.sm * 1.5,
+  },
+  goalFooter: {
+    position: 'relative',
+  },
+  goalFooterFade: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    top: -52,
   },
   startButton: {
     height: 58,

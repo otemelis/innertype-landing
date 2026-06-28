@@ -656,9 +656,12 @@ export default function ProfileTab() {
                           <Ionicons name="chevron-forward" size={13} color={a.accentColor} />
                         </>
                       ) : (
-                        <Text style={[styles.dimListStatus, { color: Colors.textTertiary }]}>
-                          Locked
-                        </Text>
+                        <>
+                          <Text style={[styles.dimListStatus, { color: Colors.textTertiary }]}>
+                            Start
+                          </Text>
+                          <Ionicons name="chevron-forward" size={13} color={Colors.textTertiary} />
+                        </>
                       )}
                     </View>
                   </TouchableOpacity>
