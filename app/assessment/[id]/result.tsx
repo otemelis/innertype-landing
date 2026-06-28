@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   Share,
   Animated,
+  Modal,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router, useLocalSearchParams } from 'expo-router';
@@ -22,6 +23,12 @@ import {
   RELATIONSHIP_TYPES,
   COMMUNICATION_TYPES,
   TYPE_ARCHETYPES,
+  TRAIT_HIGH,
+  TRAIT_LOW,
+  TypeArchetype,
+  PersonalityArchetype,
+  RelationshipType,
+  CommunicationStyleType,
 } from '../../../src/data/resultTypes';
 import { TraitBar } from '../../../src/components/ui/TraitBar';
 import { ConfidenceBadge } from '../../../src/components/ui/ConfidenceBadge';
@@ -105,6 +112,7 @@ export default function ResultScreen() {
   const [profileClarity, setProfileClarity] = useState(0);
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [isPremium, setIsPremium] = useState(false);
+  const [shareCardVisible, setShareCardVisible] = useState(false);
 
   const heroFade = useRef(new Animated.Value(0)).current;
   const heroSlide = useRef(new Animated.Value(20)).current;
@@ -210,6 +218,399 @@ export default function ResultScreen() {
   const patterns = archetypeData?.patterns ?? [];
   const blindSpot = archetypeData?.blindSpot ?? result.blindSpot;
   const description = result.summary;
+
+  function renderUnlockedSections() {
+    if (!archetypeData || !result) return null;
+
+    // ── Deep report: Personality Type ──────────────────────────────
+    if (id === 'type') {
+      const typeData = archetypeData as unknown as TypeArchetype;
+      return (
+        <>
+          <View style={styles.deepReportDivider}>
+            <Text style={[styles.deepReportLabel, { color: accentColor }]}>DEEP REPORT</Text>
+            <View style={styles.deepReportLine} />
+          </View>
+
+          <View style={styles.deepSection}>
+            <View style={styles.deepSectionHeader}>
+              <Ionicons name="star-outline" size={14} color={accentColor} />
+              <Text style={[styles.deepSectionTitle, { color: accentColor }]}>STRENGTHS</Text>
+            </View>
+            <View style={styles.deepCard}>
+              {typeData.strengths.map((s, i) => (
+                <View key={i} style={styles.bulletRow}>
+                  <View style={[styles.bullet, { backgroundColor: accentColor }]} />
+                  <Text style={styles.deepText}>{s}</Text>
+                </View>
+              ))}
+            </View>
+          </View>
+
+          <View style={styles.deepSection}>
+            <View style={styles.deepSectionHeader}>
+              <Ionicons name="briefcase-outline" size={14} color={accentColor} />
+              <Text style={[styles.deepSectionTitle, { color: accentColor }]}>WORK STYLE</Text>
+            </View>
+            <View style={styles.deepCard}>
+              <Text style={styles.deepText}>{typeData.workStyle}</Text>
+            </View>
+          </View>
+
+          <View style={styles.deepSection}>
+            <View style={styles.deepSectionHeader}>
+              <Ionicons name="heart-outline" size={14} color={accentColor} />
+              <Text style={[styles.deepSectionTitle, { color: accentColor }]}>HOW YOU CONNECT</Text>
+            </View>
+            <View style={styles.deepCard}>
+              <Text style={styles.deepText}>{typeData.relationshipStyle}</Text>
+            </View>
+          </View>
+
+          <View style={styles.deepSection}>
+            <View style={styles.deepSectionHeader}>
+              <Ionicons name="trending-up-outline" size={14} color={accentColor} />
+              <Text style={[styles.deepSectionTitle, { color: accentColor }]}>GROWTH GUIDANCE</Text>
+            </View>
+            <View style={styles.deepCard}>
+              <Text style={styles.deepText}>{typeData.growthEdge}</Text>
+            </View>
+          </View>
+
+          {/* Share card */}
+          <View style={styles.deepSection}>
+            <View style={styles.deepSectionHeader}>
+              <Ionicons name="share-outline" size={14} color={accentColor} />
+              <Text style={[styles.deepSectionTitle, { color: accentColor }]}>SHARE CARD PREVIEW</Text>
+            </View>
+            <View style={[styles.shareCardWrap, { borderColor: `${accentColor}30` }]}>
+              <LinearGradient colors={Colors.gradientBackground} style={StyleSheet.absoluteFill} />
+              <View pointerEvents="none" style={{ position: 'absolute', top: -60, right: -60, opacity: 0.35 }}>
+                <ProfileOrb clarity={100} color={accentColor} size={220} />
+              </View>
+              <Text style={[styles.shareCardWordmark, { color: accentColor }]}>INNERTYPE</Text>
+              <Text style={[styles.shareCardCode, { color: accentColor }]}>{result.primaryType ?? ''}</Text>
+              <Text style={styles.shareCardLabel}>{result.archetypeLabel}</Text>
+              <View style={styles.shareCardChips}>
+                {typeData.chips.map((c, i) => (
+                  <View key={i} style={[styles.shareCardChip, { borderColor: `${accentColor}30` }]}>
+                    <Text style={[styles.shareCardChipText, { color: accentColor }]}>{c}</Text>
+                  </View>
+                ))}
+              </View>
+              <View style={styles.shareCardFooter}>
+                <Text style={styles.shareCardClarity}>Profile clarity · {profileClarity}%</Text>
+                <Text style={styles.shareCardFooterText}>InnerType Personality Test</Text>
+              </View>
+            </View>
+            <TouchableOpacity
+              onPress={() => setShareCardVisible(true)}
+              style={[styles.shareCardPreviewBtn, { borderColor: `${accentColor}30` }]}
+              activeOpacity={0.8}
+            >
+              <Text style={[styles.shareCardPreviewBtnText, { color: accentColor }]}>Preview share card</Text>
+            </TouchableOpacity>
+            <Text style={styles.shareCardComingSoon}>Share card — coming soon</Text>
+          </View>
+
+          <Modal
+            visible={shareCardVisible}
+            transparent
+            animationType="fade"
+            onRequestClose={() => setShareCardVisible(false)}
+          >
+            <TouchableOpacity
+              style={styles.modalBackdrop}
+              activeOpacity={1}
+              onPress={() => setShareCardVisible(false)}
+            >
+              <View style={[styles.shareCardModal, { borderColor: `${accentColor}30` }]}>
+                <LinearGradient colors={Colors.gradientBackground} style={StyleSheet.absoluteFill} />
+                <View pointerEvents="none" style={{ position: 'absolute', top: -80, right: -80, opacity: 0.35 }}>
+                  <ProfileOrb clarity={100} color={accentColor} size={320} />
+                </View>
+                <Text style={[styles.shareCardWordmark, { color: accentColor, fontSize: 13 }]}>INNERTYPE</Text>
+                <Text style={[styles.shareCardCode, { color: accentColor, fontSize: 80, lineHeight: 80 }]}>{result.primaryType ?? ''}</Text>
+                <Text style={[styles.shareCardLabel, { fontSize: FontSize.xl }]}>{result.archetypeLabel}</Text>
+                <View style={styles.shareCardChips}>
+                  {typeData.chips.map((c, i) => (
+                    <View key={i} style={[styles.shareCardChip, { borderColor: `${accentColor}30` }]}>
+                      <Text style={[styles.shareCardChipText, { color: accentColor }]}>{c}</Text>
+                    </View>
+                  ))}
+                </View>
+                <View style={styles.shareCardFooter}>
+                  <Text style={styles.shareCardClarity}>Profile clarity · {profileClarity}%</Text>
+                  <Text style={styles.shareCardFooterText}>InnerType Personality Test</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          </Modal>
+        </>
+      );
+    }
+
+    // ── Deep report: Personality Traits ────────────────────────────
+    if (id === 'personality') {
+      const personalityData = archetypeData as unknown as PersonalityArchetype;
+      const scores = result.scores as PersonalityScores;
+      const allDims = ['O', 'C', 'E', 'A', 'N'] as const;
+      type Dim = typeof allDims[number];
+      const sortedDims = ([...allDims] as Dim[]).sort((a, b) => scores[b] - scores[a]);
+      const highest = sortedDims.slice(0, 2);
+      const lowest = sortedDims.slice(-2).reverse();
+
+      return (
+        <>
+          <View style={styles.deepReportDivider}>
+            <Text style={[styles.deepReportLabel, { color: accentColor }]}>DEEP REPORT</Text>
+            <View style={styles.deepReportLine} />
+          </View>
+
+          <View style={styles.deepSection}>
+            <View style={styles.deepSectionHeader}>
+              <Ionicons name="arrow-up-outline" size={14} color={accentColor} />
+              <Text style={[styles.deepSectionTitle, { color: accentColor }]}>HIGHEST TRAITS</Text>
+            </View>
+            <View style={styles.deepCard}>
+              {highest.map((dim) => (
+                <View key={dim} style={styles.traitInterpBlock}>
+                  <Text style={[styles.traitInterpDim, { color: accentColor }]}>
+                    {PERSONALITY_DIMENSION_LABELS[dim]}
+                  </Text>
+                  {TRAIT_HIGH[dim] ? (
+                    <Text style={styles.deepText}>{TRAIT_HIGH[dim]}</Text>
+                  ) : null}
+                </View>
+              ))}
+            </View>
+          </View>
+
+          <View style={styles.deepSection}>
+            <View style={styles.deepSectionHeader}>
+              <Ionicons name="arrow-down-outline" size={14} color={accentColor} />
+              <Text style={[styles.deepSectionTitle, { color: accentColor }]}>LOWEST TRAITS</Text>
+            </View>
+            <View style={styles.deepCard}>
+              {lowest.map((dim) => (
+                <View key={dim} style={styles.traitInterpBlock}>
+                  <Text style={[styles.traitInterpDim, { color: accentColor }]}>
+                    {PERSONALITY_DIMENSION_LABELS[dim]}
+                  </Text>
+                  {TRAIT_LOW[dim] ? (
+                    <Text style={styles.deepText}>{TRAIT_LOW[dim]}</Text>
+                  ) : null}
+                </View>
+              ))}
+            </View>
+          </View>
+
+          <View style={styles.deepSection}>
+            <View style={styles.deepSectionHeader}>
+              <Ionicons name="star-outline" size={14} color={accentColor} />
+              <Text style={[styles.deepSectionTitle, { color: accentColor }]}>STRENGTHS</Text>
+            </View>
+            <View style={styles.deepCard}>
+              {personalityData.strengths.map((s, i) => (
+                <View key={i} style={styles.bulletRow}>
+                  <View style={[styles.bullet, { backgroundColor: accentColor }]} />
+                  <Text style={styles.deepText}>{s}</Text>
+                </View>
+              ))}
+            </View>
+          </View>
+
+          <View style={styles.deepSection}>
+            <View style={styles.deepSectionHeader}>
+              <Ionicons name="flash-outline" size={14} color={accentColor} />
+              <Text style={[styles.deepSectionTitle, { color: accentColor }]}>STRESS PATTERN</Text>
+            </View>
+            <View style={styles.deepCard}>
+              <Text style={styles.deepText}>{personalityData.stressPattern}</Text>
+            </View>
+          </View>
+
+          <View style={styles.deepSection}>
+            <View style={styles.deepSectionHeader}>
+              <Ionicons name="briefcase-outline" size={14} color={accentColor} />
+              <Text style={[styles.deepSectionTitle, { color: accentColor }]}>WORK STYLE</Text>
+            </View>
+            <View style={styles.deepCard}>
+              <Text style={styles.deepText}>{personalityData.workStyle}</Text>
+            </View>
+          </View>
+
+          <View style={styles.deepSection}>
+            <View style={styles.deepSectionHeader}>
+              <Ionicons name="trending-up-outline" size={14} color={accentColor} />
+              <Text style={[styles.deepSectionTitle, { color: accentColor }]}>GROWTH GUIDANCE</Text>
+            </View>
+            <View style={styles.deepCard}>
+              <Text style={styles.deepText}>{personalityData.growthGuidance}</Text>
+            </View>
+          </View>
+        </>
+      );
+    }
+
+    // ── Deep report: Relationship Pattern ──────────────────────────
+    if (id === 'relationship') {
+      const relData = archetypeData as unknown as RelationshipType;
+      return (
+        <>
+          <View style={styles.deepReportDivider}>
+            <Text style={[styles.deepReportLabel, { color: accentColor }]}>DEEP REPORT</Text>
+            <View style={styles.deepReportLine} />
+          </View>
+
+          <View style={styles.deepSection}>
+            <View style={styles.deepSectionHeader}>
+              <Ionicons name="shield-checkmark-outline" size={14} color={accentColor} />
+              <Text style={[styles.deepSectionTitle, { color: accentColor }]}>HOW TRUST BUILDS</Text>
+            </View>
+            <View style={styles.deepCard}>
+              <Text style={styles.deepText}>{relData.connectionStyle}</Text>
+            </View>
+          </View>
+
+          <View style={styles.deepSection}>
+            <View style={styles.deepSectionHeader}>
+              <Ionicons name="flash-outline" size={14} color={accentColor} />
+              <Text style={[styles.deepSectionTitle, { color: accentColor }]}>WHAT CREATES DISTANCE</Text>
+            </View>
+            <View style={styles.deepCard}>
+              <Text style={styles.deepText}>{relData.stressResponse}</Text>
+            </View>
+          </View>
+
+          <View style={styles.deepSection}>
+            <View style={styles.deepSectionHeader}>
+              <Ionicons name="star-outline" size={14} color={accentColor} />
+              <Text style={[styles.deepSectionTitle, { color: accentColor }]}>STRENGTHS</Text>
+            </View>
+            <View style={styles.deepCard}>
+              {relData.strengths.map((s, i) => (
+                <View key={i} style={styles.bulletRow}>
+                  <View style={[styles.bullet, { backgroundColor: accentColor }]} />
+                  <Text style={styles.deepText}>{s}</Text>
+                </View>
+              ))}
+            </View>
+          </View>
+
+          <View style={styles.deepSection}>
+            <View style={styles.deepSectionHeader}>
+              <Ionicons name="chatbubble-ellipses-outline" size={14} color={accentColor} />
+              <Text style={[styles.deepSectionTitle, { color: accentColor }]}>WHAT YOU MAY NOT SAY</Text>
+            </View>
+            <View style={styles.deepCard}>
+              <Text style={styles.deepText}>{relData.gentleNote}</Text>
+            </View>
+          </View>
+
+          <View style={styles.deepSection}>
+            <View style={styles.deepSectionHeader}>
+              <Ionicons name="heart-circle-outline" size={14} color={accentColor} />
+              <Text style={[styles.deepSectionTitle, { color: accentColor }]}>CLOSENESS NEEDS</Text>
+            </View>
+            <View style={styles.deepCard}>
+              <Text style={styles.deepText}>{relData.closenessNeeds}</Text>
+            </View>
+          </View>
+
+          <View style={styles.deepSection}>
+            <View style={styles.deepSectionHeader}>
+              <Ionicons name="trending-up-outline" size={14} color={accentColor} />
+              <Text style={[styles.deepSectionTitle, { color: accentColor }]}>GROWTH GUIDANCE</Text>
+            </View>
+            <View style={styles.deepCard}>
+              <Text style={styles.deepText}>{relData.growthGuidance}</Text>
+            </View>
+          </View>
+        </>
+      );
+    }
+
+    // ── Deep report: Communication Style ───────────────────────────
+    if (id === 'communication') {
+      const commData = archetypeData as unknown as CommunicationStyleType;
+      return (
+        <>
+          <View style={styles.deepReportDivider}>
+            <Text style={[styles.deepReportLabel, { color: accentColor }]}>DEEP REPORT</Text>
+            <View style={styles.deepReportLine} />
+          </View>
+
+          <View style={styles.deepSection}>
+            <View style={styles.deepSectionHeader}>
+              <Ionicons name="warning-outline" size={14} color={accentColor} />
+              <Text style={[styles.deepSectionTitle, { color: accentColor }]}>CONFLICT STYLE</Text>
+            </View>
+            <View style={styles.deepCard}>
+              <Text style={styles.deepText}>{commData.conflictPattern}</Text>
+            </View>
+          </View>
+
+          <View style={styles.deepSection}>
+            <View style={styles.deepSectionHeader}>
+              <Ionicons name="briefcase-outline" size={14} color={accentColor} />
+              <Text style={[styles.deepSectionTitle, { color: accentColor }]}>WORK & TEAM STYLE</Text>
+            </View>
+            <View style={styles.deepCard}>
+              <Text style={styles.deepText}>{commData.bestEnvironment}</Text>
+            </View>
+          </View>
+
+          <View style={styles.deepSection}>
+            <View style={styles.deepSectionHeader}>
+              <Ionicons name="star-outline" size={14} color={accentColor} />
+              <Text style={[styles.deepSectionTitle, { color: accentColor }]}>STRENGTHS</Text>
+            </View>
+            <View style={styles.deepCard}>
+              {commData.strengths.map((s, i) => (
+                <View key={i} style={styles.bulletRow}>
+                  <View style={[styles.bullet, { backgroundColor: accentColor }]} />
+                  <Text style={styles.deepText}>{s}</Text>
+                </View>
+              ))}
+            </View>
+          </View>
+
+          <View style={styles.deepSection}>
+            <View style={styles.deepSectionHeader}>
+              <Ionicons name="shield-outline" size={14} color={accentColor} />
+              <Text style={[styles.deepSectionTitle, { color: accentColor }]}>BOUNDARY STYLE</Text>
+            </View>
+            <View style={styles.deepCard}>
+              <Text style={styles.deepText}>{commData.boundaryStyle}</Text>
+            </View>
+          </View>
+
+          <View style={styles.deepSection}>
+            <View style={styles.deepSectionHeader}>
+              <Ionicons name="refresh-outline" size={14} color={accentColor} />
+              <Text style={[styles.deepSectionTitle, { color: accentColor }]}>REPAIR STYLE</Text>
+            </View>
+            <View style={styles.deepCard}>
+              <Text style={styles.deepText}>{commData.repairStyle}</Text>
+            </View>
+          </View>
+
+          <View style={styles.deepSection}>
+            <View style={styles.deepSectionHeader}>
+              <Ionicons name="trending-up-outline" size={14} color={accentColor} />
+              <Text style={[styles.deepSectionTitle, { color: accentColor }]}>GROWTH GUIDANCE</Text>
+            </View>
+            <View style={styles.deepCard}>
+              <Text style={styles.deepText}>{commData.growthGuidance}</Text>
+            </View>
+          </View>
+        </>
+      );
+    }
+
+    return null;
+  }
 
   return (
     <View style={styles.container}>
@@ -419,6 +820,9 @@ export default function ResultScreen() {
               </View>
             </View>
           )}
+
+          {/* ── Unlocked deep report sections ── */}
+          {isPremium && renderUnlockedSections()}
 
           {/* ── Actions ── */}
           <View style={styles.actionsRow}>
@@ -812,5 +1216,161 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: FontSize.xs * 1.65,
     paddingHorizontal: 12,
+  },
+
+  // ── Deep report sections ──
+  deepReportDivider: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+  },
+  deepReportLabel: {
+    fontSize: 9,
+    fontWeight: FontWeight.bold,
+    letterSpacing: 1.5,
+    flexShrink: 0,
+  },
+  deepReportLine: {
+    flex: 1,
+    height: 1,
+    backgroundColor: Colors.surfaceBorder,
+  },
+  deepSection: { gap: 8 },
+  deepSectionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  deepSectionTitle: {
+    fontSize: 10,
+    fontWeight: FontWeight.bold,
+    letterSpacing: 1.2,
+  },
+  deepCard: {
+    backgroundColor: Colors.surface,
+    borderRadius: 14,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: Colors.surfaceBorder,
+    gap: 10,
+  },
+  deepText: {
+    fontSize: FontSize.base,
+    color: Colors.textSecondary,
+    lineHeight: FontSize.base * 1.65,
+  },
+  bulletRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: 10,
+  },
+  bullet: {
+    width: 5,
+    height: 5,
+    borderRadius: 2.5,
+    marginTop: 8,
+    flexShrink: 0,
+  },
+  traitInterpBlock: { gap: 5 },
+  traitInterpDim: {
+    fontSize: FontSize.sm,
+    fontWeight: FontWeight.semiBold,
+  },
+
+  // ── Share card ──
+  shareCardWrap: {
+    borderRadius: 18,
+    overflow: 'hidden',
+    borderWidth: 1,
+    padding: 24,
+    gap: 10,
+    position: 'relative',
+    aspectRatio: 0.75,
+    justifyContent: 'flex-end',
+  },
+  shareCardWordmark: {
+    fontSize: 10,
+    fontWeight: FontWeight.bold,
+    letterSpacing: 3,
+    position: 'absolute',
+    top: 24,
+    left: 24,
+  },
+  shareCardCode: {
+    fontSize: 58,
+    fontWeight: FontWeight.bold,
+    letterSpacing: -2,
+    lineHeight: 58,
+  },
+  shareCardLabel: {
+    fontSize: FontSize.lg,
+    fontFamily: FontFamily.display,
+    fontWeight: '400',
+    color: Colors.textPrimary,
+  },
+  shareCardChips: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 6,
+  },
+  shareCardChip: {
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 20,
+    borderWidth: 1,
+    backgroundColor: 'rgba(255,255,255,0.04)',
+  },
+  shareCardChipText: {
+    fontSize: FontSize.xs,
+    fontWeight: FontWeight.medium,
+  },
+  shareCardFooter: {
+    gap: 3,
+    paddingTop: 10,
+    borderTopWidth: 1,
+    borderTopColor: Colors.surfaceBorder,
+  },
+  shareCardClarity: {
+    fontSize: FontSize.xs,
+    color: Colors.textSecondary,
+    fontWeight: FontWeight.medium,
+  },
+  shareCardFooterText: {
+    fontSize: FontSize.xs,
+    color: Colors.textTertiary,
+  },
+  shareCardPreviewBtn: {
+    height: 42,
+    borderRadius: 12,
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  shareCardPreviewBtnText: {
+    fontSize: FontSize.sm,
+    fontWeight: FontWeight.semiBold,
+  },
+  shareCardComingSoon: {
+    fontSize: FontSize.xs,
+    color: Colors.textTertiary,
+    textAlign: 'center',
+  },
+  modalBackdrop: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.85)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 24,
+  },
+  shareCardModal: {
+    width: '100%',
+    borderRadius: 20,
+    overflow: 'hidden',
+    borderWidth: 1,
+    padding: 32,
+    gap: 14,
+    position: 'relative',
+    aspectRatio: 0.75,
+    justifyContent: 'flex-end',
   },
 });
