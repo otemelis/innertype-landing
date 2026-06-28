@@ -53,10 +53,10 @@ export default function AssessmentsTab() {
 
   // Surface the goal-preferred assessment first so fresh users see the right starting point
   const GOAL_TO_ID: Record<string, string> = {
-    understand_myself: 'personality',
+    understand_myself: 'type',
     improve_relationships: 'relationship',
     communicate_better: 'communication',
-    work_style: 'personality',
+    work_style: 'type',
   };
   const goalId = profile?.primaryGoal ? GOAL_TO_ID[profile.primaryGoal] : null;
   const orderedAssessments: AssessmentMeta[] = goalId && completedCount === 0
@@ -82,7 +82,7 @@ export default function AssessmentsTab() {
               <Text style={styles.headerOverline}>PROFILE DIMENSIONS</Text>
               <Text style={styles.headerTitle}>Build your{'\n'}profile</Text>
               <Text style={styles.headerSubtitle}>
-                Three dimensions form your complete InnerType — personality, relationships, and communication.
+                Four dimensions form your complete InnerType — type, traits, relationships, and communication.
               </Text>
             </View>
             <ProfileOrb clarity={clarity} color={Colors.innerType} size={100} style={styles.headerOrb} />
@@ -99,9 +99,9 @@ export default function AssessmentsTab() {
               <View style={styles.clarityBannerRow}>
                 <Text style={styles.clarityBannerPercent}>{clarity}%</Text>
                 <Text style={styles.clarityBannerText}>
-                  {completedCount === 3
+                  {completedCount === 4
                     ? 'Profile complete — your InnerType is fully revealed.'
-                    : `Profile clarity · ${completedCount} of 3 dimensions mapped.`}
+                    : `Profile clarity · ${completedCount} of 4 dimensions mapped.`}
                 </Text>
               </View>
             </View>
