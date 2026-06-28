@@ -9,6 +9,9 @@ export interface PersonalityArchetype {
   patterns: { icon: string; title: string; body: string }[];
   strengths: string[];
   blindSpot: string;
+  stressPattern: string;
+  workStyle: string;
+  growthGuidance: string;
 }
 
 export const PERSONALITY_ARCHETYPES: PersonalityArchetype[] = [
@@ -39,6 +42,9 @@ export const PERSONALITY_ARCHETYPES: PersonalityArchetype[] = [
     strengths: ['Deep curiosity', 'Original thinking', 'Quiet perceptiveness'],
     blindSpot:
       'Others may sometimes mistake your internal processing for distance or unavailability. You may be fully present and simply not showing it. Sharing your thinking earlier than feels ready can prevent unnecessary disconnection.',
+    stressPattern: 'Under stress, you tend to withdraw into internal processing before you can engage outwardly. The withdrawal can look like distance or detachment to others, even when you are actually working through something important. Stimulating environments or emotional pressure without adequate processing time deplete you faster than most things.',
+    workStyle: 'You work best with intellectual freedom, uninterrupted focus, and work that rewards depth over speed. Environments that require constant social interaction or fast surface-level output are draining. You produce your best thinking in quiet, with time to follow a problem where it leads.',
+    growthGuidance: 'The most useful development for you is learning to surface your thinking before it feels complete. This is uncomfortable — but it creates connection, invites collaboration, and often produces better outcomes than finishing alone and presenting. Start with one trusted person.',
   },
   {
     key: 'CalmStrategist',
@@ -67,6 +73,9 @@ export const PERSONALITY_ARCHETYPES: PersonalityArchetype[] = [
     strengths: ['Reliability', 'Focused execution', 'Emotional steadiness'],
     blindSpot:
       'Your preference for structure can sometimes translate into resistance when plans shift unexpectedly. Improvisation is not a threat to your competence — it is a different skill, and one worth developing alongside your natural strengths.',
+    stressPattern: 'Stress tends to show up as increased rigidity — a tightening of the plan when the situation is actually calling for flexibility. You may find yourself holding to a structure that is no longer serving the goal, because certainty is more comfortable than improvisation under pressure.',
+    workStyle: 'You work best with clear goals, defined processes, and the opportunity to plan properly before acting. Environments that reward consistent execution over dramatic output suit you. You are reliable across time — which means roles where long-term follow-through is valued are where you contribute most.',
+    growthGuidance: 'Your next area of development is learning to read when the plan has outlived its usefulness. Not every shift in circumstances is a problem to solve — some are invitations to adapt. Holding your standards while staying genuinely curious about whether the approach still fits is a high-skill state.',
   },
   {
     key: 'WarmConnector',
@@ -95,6 +104,9 @@ export const PERSONALITY_ARCHETYPES: PersonalityArchetype[] = [
     strengths: ['Emotional attunement', 'Building trust', 'Collaborative ease'],
     blindSpot:
       'You may find it genuinely harder to advocate for your own needs than for others. Naming what you want directly can feel uncomfortable — almost selfish. It is not. Your generosity is more sustainable when it also includes yourself.',
+    stressPattern: 'Under stress, you tend to absorb others\' emotions while managing your own privately. You may find yourself working to stabilise the people around you when you are the one who actually needs support. The cost of this becomes visible after the fact, not during.',
+    workStyle: 'You work best in environments that value both relationship quality and practical contribution. Collaborative work energises you when it is genuine rather than performative. You are often a de facto coordinator of human dynamics even without the formal role.',
+    growthGuidance: 'Advocating for your own needs with the same directness you bring to others is the work. Not because you are not doing enough — but because your sustainability depends on it. The people who care about you cannot help unless they can see what is actually needed.',
   },
   {
     key: 'SensitiveVisionary',
@@ -123,6 +135,9 @@ export const PERSONALITY_ARCHETYPES: PersonalityArchetype[] = [
     strengths: ['Intuitive pattern recognition', 'Emotional intelligence', 'Strategic sensitivity'],
     blindSpot:
       'Your sensitivity to criticism and uncertainty is higher than average. A single pointed remark can occupy more mental space than the rest of a positive day. Developing a faster internal pathway from reaction to perspective is one of the highest-return investments available to you.',
+    stressPattern: 'Stress tends to amplify your sensitivity to criticism and interpersonal signals. A critical comment or shift in someone\'s energy can occupy significant mental space, even when it is peripheral to what actually matters. Distinguishing important signals from noise is genuinely harder under pressure.',
+    workStyle: 'You work best in environments that honour both intuition and quality — where your ability to read beneath the surface is valued rather than discounted. You produce strong outcomes in roles that require emotional intelligence and strategic perception simultaneously. High-noise, low-trust environments cost you significantly.',
+    growthGuidance: 'Learning to voice your assessments before you have full certainty is both difficult and high-leverage for you. The intuitions you are not sharing are often more accurate than you give them credit for. Trusting them earlier — and testing them with people you respect — is where significant growth is available.',
   },
   {
     key: 'ExpressiveIdealist',
@@ -151,6 +166,9 @@ export const PERSONALITY_ARCHETYPES: PersonalityArchetype[] = [
     strengths: ['Social momentum', 'Cross-context connection', 'Enthusiastic openness'],
     blindSpot:
       'Your energy and enthusiasm can sometimes outpace your depth of commitment. Beginning things is easy; sustaining them through the less exciting middle phases is where your real development work lies.',
+    stressPattern: 'Under stress, your energy can escalate rather than diminish — leading to over-initiation, over-socialising, or optimism that outpaces the reality of a situation. You may generate momentum in a direction that needs a pause rather than more speed. Recognising this as a stress pattern, rather than your natural enthusiasm, gives you a useful pause point.',
+    workStyle: 'You are most engaged in work that involves people, novelty, and the sense that something is being started. Routine and bureaucracy drain you. You are strongest in roles where your energy and openness to people generate genuine value — and where there is support or structure to ensure follow-through happens.',
+    growthGuidance: 'Depth of commitment, sustained across time, is where the most significant growth is available to you. Beginning things comes naturally. Staying through the phases that are less exciting — and finding meaning in the consistency rather than the launch — will produce the outcomes your ambition is actually after.',
   },
   {
     key: 'CuriousArchitect',
@@ -179,6 +197,9 @@ export const PERSONALITY_ARCHETYPES: PersonalityArchetype[] = [
     strengths: ['Systems thinking', 'Intellectual range', 'Long-horizon planning'],
     blindSpot:
       'The gap between your internal clarity and your ability to communicate it can frustrate others. What feels obvious from inside your framework may be invisible to someone seeing only the output. Translating your thinking for others is a learnable skill — and a high-leverage one.',
+    stressPattern: 'Under stress, you often disappear into thinking more than is useful — building elaborate frameworks for a situation that actually needs action. The analysis can feel productive while actually being avoidant. Time-bounding your thinking periods and committing to an output before the analysis feels complete is a useful friction.',
+    workStyle: 'You work best with intellectual latitude, complex problems, and the ability to operate independently for extended periods. Environments that combine creative autonomy with real-world stakes are where you are most motivated. You need intellectual peers who can engage with the full range of what you are building.',
+    growthGuidance: 'The gap between how clearly you see something internally and how effectively you communicate it externally is the most important gap to close. You have something worth communicating. The work is developing the translation — not as a concession to others, but as the last step in making your thinking actually useful.',
   },
   {
     key: 'GroundedHarmonizer',
@@ -207,6 +228,9 @@ export const PERSONALITY_ARCHETYPES: PersonalityArchetype[] = [
     strengths: ['Emotional steadiness', 'Practical follow-through', 'Trustworthiness'],
     blindSpot:
       'Your preference for harmony can sometimes mean you defer resolution rather than pursue it. You may smooth over a conflict before both sides have fully said what they need to say. Some tensions need to be held open — not to create drama, but because the conversation is not actually finished.',
+    stressPattern: 'Stress tends to push you toward over-accommodation — managing tensions and keeping the peace in ways that delay your own needs getting addressed. You may smooth things over before the underlying issue is fully resolved, which can lead to the same tension recurring.',
+    workStyle: 'You work best in collaborative environments where reliability and consistency are genuinely valued. You are most effective when the work has human stakes and clear contribution. Your steady, follow-through nature makes you essential in any team that has the self-awareness to notice what you are actually doing.',
+    growthGuidance: 'Holding tension open long enough for it to be resolved — rather than closing it for the sake of harmony — is the development work. Some conversations need to be uncomfortable to move. Your ability to stay warm while being honest is a rare combination. Using it on behalf of your own needs is the part that needs practice.',
   },
   {
     key: 'PrivateAnalyst',
@@ -235,6 +259,9 @@ export const PERSONALITY_ARCHETYPES: PersonalityArchetype[] = [
     strengths: ['Precise observation', 'High-quality output', 'Selective depth'],
     blindSpot:
       'The distance between your inner world and what others can see of you is wider than you realize. People who are not yet close to you may experience you as unavailable, even when you are paying close attention. Small signals of engagement — a question, a visible reaction — close that gap significantly.',
+    stressPattern: 'Stress tends to intensify your withdrawal and self-criticism simultaneously. You may become more reserved externally while holding yourself to higher internal standards than the situation warrants. The gap between what others see and what is actually happening inside widens under pressure.',
+    workStyle: 'You work best with meaningful problems, high standards, and significant autonomy. Environments that allow independent work with occasional collaboration suit you. The quality of your output tends to be high, and you are most valuable in roles where depth matters.',
+    growthGuidance: 'Making yourself readable to people who have not yet earned your full trust is genuinely worth doing. Not because openness should be unconditional — but because the gap between your internal life and what others can see is wider than it serves you. Small, deliberate signals of engagement close it significantly.',
   },
 ];
 
@@ -252,6 +279,8 @@ export interface RelationshipType {
   strengths: string[];
   blindSpot: string;
   gentleNote: string;
+  closenessNeeds: string;
+  growthGuidance: string;
 }
 
 export const RELATIONSHIP_TYPES: RelationshipType[] = [
@@ -288,6 +317,8 @@ export const RELATIONSHIP_TYPES: RelationshipType[] = [
       'You may occasionally underestimate how much uncertainty others bring to closeness. What feels easy and natural to you can feel genuinely risky for someone with a different relational history. Meeting people where they are — not where you expect them to be — is your growth edge.',
     gentleNote:
       'Security is not a permanent state. It is cultivated, and it can deepen through conscious relational practice and continued self-awareness.',
+    closenessNeeds: 'You can hold closeness lightly — moving toward and away from it without the proximity itself becoming a source of anxiety. You need relationships where space is treated as neutral rather than significant. Too much pressure for constant emotional contact is tiring for you, even when the relationship is genuinely good.',
+    growthGuidance: 'Your secure baseline is a real asset, but it can make it harder to stay patient with partners or friends whose attachment is less settled. The growth edge is not becoming less secure — it is deepening your understanding of what it costs someone else to get there, and adjusting your pace accordingly.',
   },
   {
     key: 'Anxious',
@@ -322,6 +353,8 @@ export const RELATIONSHIP_TYPES: RelationshipType[] = [
       'The urgency you feel for connection can sometimes communicate itself as need, even when your intention is simply care. Building steadiness that comes from within — rather than from external confirmation — is the most durable version of the security you are seeking.',
     gentleNote:
       'Deep investment in people is not a flaw. It is a form of care. The work is learning how to hold it without it holding you.',
+    closenessNeeds: 'You need relationships where the connection is visible enough to feel real. Regular contact, expressed investment, and honest communication about the state of the relationship help you feel settled. Ambiguity and distance without explanation are genuinely difficult — not because you are demanding, but because your attachment system registers uncertainty as a signal worth responding to.',
+    growthGuidance: 'The most productive development work for this pattern is building your capacity to tolerate ambiguity without immediately seeking reassurance. This is not about needing less — it is about finding the pause between an anxious signal and your response to it. That pause is where you have the most freedom.',
   },
   {
     key: 'Avoidant',
@@ -356,6 +389,8 @@ export const RELATIONSHIP_TYPES: RelationshipType[] = [
       'People who care about you may not always know how to reach you. The gap between your internal experience and what you show externally can be wider than you realize — and wider than the people close to you can comfortably hold. Selective, intentional disclosure is a learnable skill, and it dramatically changes how people experience closeness with you.',
     gentleNote:
       'Your independence is a genuine strength. The question is whether it is a choice or a reflex — and you are the only one who can tell the difference.',
+    closenessNeeds: 'You need more independence within a close relationship than most attachment patterns do. This is not about low investment — it is about the conditions under which you can invest without feeling overwhelmed. Relationships where you are given genuine space and are not required to process everything verbally are the ones where you show up most.',
+    growthGuidance: 'Letting people in more, more often, before complete trust is established is the work. Not recklessly, but progressively. The people who matter most to you benefit more from your presence than from your protection. Small acts of deliberate openness, over time, tend to produce the quality of closeness that is actually worth the risk.',
   },
   {
     key: 'FearfulAvoidant',
@@ -390,6 +425,8 @@ export const RELATIONSHIP_TYPES: RelationshipType[] = [
       'The internal push-pull that makes sense to you can register as confusing or even hurtful to people who care about you. Even brief communication during uncertain moments — just naming where you are — protects the relationships you value most.',
     gentleNote:
       'This pattern is more common than most people realize, and it is among the most responsive to self-awareness. Understanding it is the first meaningful step.',
+    closenessNeeds: 'You need relationships with enough consistency and low-stakes contact to build safety incrementally. You can become genuinely close with people — but only through accumulated evidence of safety, not through leaps. Relationships that move fast toward high intimacy tend to trigger the part of you that protects itself, even when the other person has done nothing wrong.',
+    growthGuidance: 'The pattern of wanting closeness and then moving away from it — or pushing people away just as it becomes real — is recognisable to you even when it is hard to stop in the moment. The most useful practice is not resisting the impulse entirely, but staying present in low-stakes moments of connection until the threat response softens. It does soften.',
   },
 ];
 
@@ -406,6 +443,9 @@ export interface CommunicationStyleType {
   bestEnvironment: string;
   strengths: string[];
   blindSpot: string;
+  boundaryStyle: string;
+  repairStyle: string;
+  growthGuidance: string;
 }
 
 export const COMMUNICATION_TYPES: CommunicationStyleType[] = [
@@ -440,6 +480,9 @@ export const COMMUNICATION_TYPES: CommunicationStyleType[] = [
     strengths: ['Clarity under pressure', 'Productive conflict navigation', 'Group decision-making'],
     blindSpot:
       'Your pace and directness can sometimes land as pressure — particularly for people who process more slowly or who need more emotional space before they can hear content. A brief pause before delivery does not compromise your honesty; it often makes it land better.',
+    boundaryStyle: 'You tend to set limits clearly when they are crossed — though you usually extend significant goodwill before the limit is named. Your directness means limits are stated more explicitly than with most styles, which can feel blunt to people who communicate indirectly. You would rather clarify than manage a resentment.',
+    repairStyle: 'After conflict, you tend to move toward resolution fairly quickly. Sitting in unresolved tension is uncomfortable. You are willing to say what needs to be said to close a rupture, and you expect others to meet you in that. Drawn-out repair processes test your patience.',
+    growthGuidance: 'The place where the most development is available is in slowing down the drive to resolve — not to avoid resolution, but to ensure both people have fully had their say before you move on. Sometimes repair feels complete to you before it does to the other person.',
   },
   {
     key: 'ReflectiveProcessor',
@@ -472,6 +515,9 @@ export const COMMUNICATION_TYPES: CommunicationStyleType[] = [
     strengths: ['Thoughtful precision', 'Active listening', 'Written clarity'],
     blindSpot:
       'Others may interpret your silence as disengagement, coolness, or disapproval. Signaling where you are — even briefly — prevents significant misreading. A "I need a day to think about this" goes a long way.',
+    boundaryStyle: 'You tend to set limits indirectly or very late — often after you have absorbed more than you needed to. You notice when something feels off long before you name it. The gap between noticing and saying is where the cost accumulates.',
+    repairStyle: 'After conflict, you need time to process before you can re-engage. Being pushed toward repair before that has happened tends to produce surface agreement rather than genuine resolution. Given space, you tend to return to people fully — and more thoughtfully than most.',
+    growthGuidance: 'Naming what you need, when you notice you need it — rather than waiting until the situation is clearer — is the development work. The wait is understandable. But by the time clarity arrives, others may have moved on or drawn the wrong conclusions.',
   },
   {
     key: 'CalmStrategist',
@@ -504,6 +550,9 @@ export const COMMUNICATION_TYPES: CommunicationStyleType[] = [
     strengths: ['Composure under pressure', 'Strategic problem-solving', 'Efficient communication'],
     blindSpot:
       'For many people, being heard emotionally is the prerequisite to being heard rationally. Trying to solve before acknowledging tends to extend the conflict, not shorten it. The emotional step is not inefficiency — it is the work.',
+    boundaryStyle: 'You set limits through policy and principle rather than through emotional expression. You tend not to make it personal — you state the standard and hold to it. This works well in low-stakes contexts; in high-stakes personal ones, people sometimes need to feel the emotional weight behind the limit, not just the logic.',
+    repairStyle: 'You approach repair practically and without drama. Once you have identified the problem, you propose a fix. The emotional residue of conflict is less important to you than whether the functional problem has been solved. Some people need more of the emotional piece before the practical is useful.',
+    growthGuidance: 'Sitting with the relational texture of a conflict — the feelings, not just the facts — is the edge. Not because emotional processing is more valid than practical resolution, but because people sometimes need to be met in the feeling before they can receive the solution.',
   },
   {
     key: 'ExpressiveConnector',
@@ -536,6 +585,9 @@ export const COMMUNICATION_TYPES: CommunicationStyleType[] = [
     strengths: ['Emotional intelligence', 'Building trust quickly', 'Reading people accurately'],
     blindSpot:
       'Your preference for harmony can lead you to soften your message until it loses its edge. The people who matter to you often want your honest perspective more than your managed one. Saying the full thing, with care, is not the opposite of connection — it is often what deepens it.',
+    boundaryStyle: 'You find it genuinely difficult to set limits when doing so risks the relationship. You may absorb more than is sustainable because you are unwilling to introduce friction. When limits do get set, they sometimes come out more sharply than intended — the result of long restraint rather than aggression.',
+    repairStyle: 'You repair through warmth and re-connection rather than through explicit conversation about what went wrong. You tend to soften things with affection and check-in rather than revisit the conflict directly. This works in some relationships; in others, it can leave the underlying issue unaddressed.',
+    growthGuidance: 'Learning to name a limit in the moment rather than after the resentment has built is the highest-leverage development available here. You can be warm and direct at the same time — the warmth does not require you to be silent about what you need.',
   },
   {
     key: 'IndependentProtector',
@@ -568,6 +620,9 @@ export const COMMUNICATION_TYPES: CommunicationStyleType[] = [
     strengths: ['Emotional self-containment', 'Consistent boundaries', 'Deliberate trust'],
     blindSpot:
       'People who care about you may interpret your reserve as indifference. The gap between your internal experience and what you show externally is probably wider than you think. A small, selective increase in visibility — particularly during moments that matter — changes the relational equation significantly.',
+    boundaryStyle: 'You set limits clearly and early, usually through withdrawal rather than direct statement. Others often feel the boundary before it is articulated. You are not interested in over-explaining your limits — you expect them to be respected once they are visible.',
+    repairStyle: 'After conflict, you need significant time and space before re-engagement is possible. Coming back too quickly feels like unfinished business. When you do return, it is usually with clarity — but the period of distance can feel extended to others who process differently.',
+    growthGuidance: 'Articulating limits verbally — rather than letting them be inferred from your behavior — shortens the distance others feel and reduces the chance of misinterpretation. Not all of your withdrawal is readable as a boundary. Some of it looks like rejection.',
   },
 ];
 
@@ -1055,3 +1110,19 @@ export const TYPE_ARCHETYPES: TypeArchetype[] = [
     relationshipStyle: 'You connect fast and genuinely, and you bring joy to the people around you. Sustaining depth through the less exciting phases of a close relationship — the ones that require patience or difficult conversation — is where your relational growth tends to happen.',
   },
 ];
+
+export const TRAIT_HIGH: Record<string, string> = {
+  O: 'You are drawn to ideas, novelty, and complexity. New frameworks, unconventional thinking, and open-ended questions tend to energise you. You are more likely than most to be changed by a good conversation.',
+  C: 'You bring genuine follow-through and structure to almost everything you take on. Commitments feel real to you. You tend to hold yourself to a consistent standard even when no one is watching.',
+  E: 'You are energised by contact with people and drawn toward environments where things are happening. Social engagement fills rather than drains you. Isolation for extended periods becomes uncomfortable fairly quickly.',
+  A: 'You lead with warmth and tend toward cooperation over competition. You are genuinely responsive to others\' needs and states. This makes you easy to work with and often a stabilising presence — at some cost to your own directness.',
+  N: 'You feel things fully and often notice the emotional texture of situations before others do. Your sensitivity is real information — it tells you things. The challenge is distinguishing signal from noise, especially under stress.',
+};
+
+export const TRAIT_LOW: Record<string, string> = {
+  O: 'You prefer what is concrete, tested, and reliable. Proven approaches give you more confidence than novel ones, and you trust experience over theory. This is a strength in contexts where consistency and precision matter.',
+  C: 'You work best with flexibility and open-ended timelines. Fixed processes and rigid planning tend to feel constraining. You often do your best thinking in response to what is actually happening rather than what was anticipated.',
+  E: 'You restore through solitude and prefer depth over breadth in your social world. Extended social contact is tiring regardless of how much you enjoy it. Your best thinking happens in quiet, and you are more present in small groups than large ones.',
+  A: 'You tend to be more analytic than accommodating when interests conflict. You are direct and willing to disagree, which is useful in contexts where truth matters more than harmony. It can create friction in environments built around consensus.',
+  N: 'You tend to stay regulated under conditions that would destabilise others. Emotional pressure does not quickly disrupt your functioning. This is a genuine strength in high-stakes situations — and something to stay aware of when others around you are struggling.',
+};
