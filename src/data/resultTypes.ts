@@ -793,6 +793,8 @@ export interface TypeArchetype {
   strengths: [string, string, string];
   blindSpot: string;
   growthEdge: string;
+  workStyle: string;
+  relationshipStyle: string;
 }
 
 export const TYPE_ARCHETYPES: TypeArchetype[] = [
@@ -809,6 +811,8 @@ export const TYPE_ARCHETYPES: TypeArchetype[] = [
     strengths: ['Strategic foresight', 'Intellectual depth', 'Self-directed drive'],
     blindSpot: 'You may underestimate how your directness lands on others, especially when you\'re focused on getting to the right answer.',
     growthEdge: 'Letting others into your thinking process before the plan is complete — collaboration as input, not just output.',
+    workStyle: 'You do your best work when you have genuine ownership of the problem and the latitude to solve it your way. Collaboration is useful when it adds thinking you do not have — not as a process requirement. You need work that rewards depth and precision.',
+    relationshipStyle: 'You invest deeply in a very small number of people, and that investment is real. Closeness builds through shared thinking and mutual respect, not through frequency or warmth alone. You can be more emotionally available than you appear — the barrier is trust, not feeling.',
   },
   {
     key: 'INTP', typeCode: 'INTP', label: 'Independent Analyst',
@@ -823,6 +827,8 @@ export const TYPE_ARCHETYPES: TypeArchetype[] = [
     strengths: ['Conceptual precision', 'Independent reasoning', 'Curiosity-driven insight'],
     blindSpot: 'Finishing things. The exploration is more interesting than the conclusion — which can leave projects unresolved.',
     growthEdge: 'Choosing done over perfect when the context calls for it, without abandoning your standards entirely.',
+    workStyle: 'You are most productive when you can follow a problem to its root without artificial deadlines cutting off the process. Environments that measure output over depth tend to frustrate you. You produce your best work in independent conditions with access to information and time.',
+    relationshipStyle: 'Close relationships develop slowly for you, through accumulated experience of being understood. You value intellectual connection and genuine interest in your thinking. Physical presence is not necessary for you to feel close — shared depth is.',
   },
   {
     key: 'ENTJ', typeCode: 'ENTJ', label: 'Decisive Leader',
@@ -837,6 +843,8 @@ export const TYPE_ARCHETYPES: TypeArchetype[] = [
     strengths: ['Goal clarity', 'Decisive action', 'Natural leadership presence'],
     blindSpot: 'Slowing down to hear people who process differently. Speed and conviction can crowd out the input you actually need.',
     growthEdge: 'Learning when to pause before deciding — not as doubt, but as strategy.',
+    workStyle: 'You operate best with clear goals, real authority, and high stakes. You think faster than most people around you, which means you need colleagues who can keep up or move aside. You lead regardless of whether you have the title.',
+    relationshipStyle: 'You are more emotionally invested in your close relationships than your exterior suggests. You show care through action, presence, and honesty — including difficult honesty. You need partners and friends who are direct with you in return.',
   },
   {
     key: 'ENTP', typeCode: 'ENTP', label: 'Curious Challenger',
@@ -851,6 +859,8 @@ export const TYPE_ARCHETYPES: TypeArchetype[] = [
     strengths: ['Rapid ideation', 'Systems-level challenge', 'Intellectual flexibility'],
     blindSpot: 'Follow-through after the creative burst. Ideas need execution, and execution is where the interest tends to drop.',
     growthEdge: 'Choosing one thread and seeing it through, even after the novelty fades.',
+    workStyle: 'You are most engaged when the work has not been solved before and the rules are not fixed yet. You get bored in roles that optimize execution over invention. You need intellectual peers and contexts where your ability to challenge assumptions is an asset, not a liability.',
+    relationshipStyle: 'You connect through ideas and debate, often more than through emotional conversation. You respect people who push back on you, and you may find those who do not oddly unsatisfying as close companions. Care shows up as sustained interest in who someone is becoming.',
   },
   {
     key: 'INFJ', typeCode: 'INFJ', label: 'Reflective Idealist',
@@ -865,6 +875,8 @@ export const TYPE_ARCHETYPES: TypeArchetype[] = [
     strengths: ['Intuitive perception', 'Deep empathy', 'Long-range vision'],
     blindSpot: 'Perfectionism that delays sharing until the idea feels complete enough — which may never come.',
     growthEdge: 'Letting people into the process, not just the product.',
+    workStyle: 'You need your work to align with something you believe in, or the energy will not be there regardless of the pay. You work best when you have privacy to think and time to develop ideas before they are tested. Environments that value intuition and depth are where you contribute most.',
+    relationshipStyle: 'You form very close bonds with very few people. You are often more attuned to others\' emotional states than to your own. You show up fully for people you trust — but the door to that trust opens slowly, and closes quickly if something fundamental is violated.',
   },
   {
     key: 'INFP', typeCode: 'INFP', label: 'Depth Seeker',
@@ -879,6 +891,8 @@ export const TYPE_ARCHETYPES: TypeArchetype[] = [
     strengths: ['Emotional authenticity', 'Deep personal values', 'Creative inner life'],
     blindSpot: 'Difficulty with criticism when it touches something identity-adjacent.',
     growthEdge: 'Separating feedback about the work from feedback about you — as a practice, not just a concept.',
+    workStyle: 'Meaning is not a bonus for you — it is the fuel. You can sustain significant effort in work that feels authentic, and very little in work that does not. You are creative and introspective, and you produce your best output when given ownership and purpose rather than process.',
+    relationshipStyle: 'You love deeply and for a long time — often longer than the other person realises. Authenticity in a relationship matters to you more than consistency or frequency. You need the people close to you to meet you in depth, not just in practicality.',
   },
   {
     key: 'ENFJ', typeCode: 'ENFJ', label: 'Warm Catalyst',
@@ -893,6 +907,8 @@ export const TYPE_ARCHETYPES: TypeArchetype[] = [
     strengths: ['Relational leadership', 'Genuine warmth', 'Inspiring others into growth'],
     blindSpot: 'Giving more than is sustainable, and not noticing the depletion until it\'s significant.',
     growthEdge: 'Naming your own needs as clearly as you name others\'. Reciprocity is not a failure of generosity.',
+    workStyle: 'You are energised by work that serves people in a visible way. You collaborate naturally, often becoming the person who holds the group together emotionally. You do your best work when you can see the human impact — and when the people around you are growing.',
+    relationshipStyle: 'You give a lot to the people you love — often more than they have asked for. Your attunement to others\' needs is a genuine gift, and it can lead to connections that feel rare. The challenge is ensuring you receive as clearly as you give.',
   },
   {
     key: 'ENFP', typeCode: 'ENFP', label: 'Open Visionary',
@@ -907,6 +923,8 @@ export const TYPE_ARCHETYPES: TypeArchetype[] = [
     strengths: ['Creative vision', 'Relational energy', 'Adaptive enthusiasm'],
     blindSpot: 'Committing and following through when the initial excitement fades.',
     growthEdge: 'Building systems that hold you accountable to your own intentions — without killing the spontaneity.',
+    workStyle: 'You are energised by possibility, novelty, and connection. You bring ideas and enthusiasm that others build on. The challenge is sustaining effort through the parts of a project that are less interesting — which is where structure or accountability partnerships help.',
+    relationshipStyle: 'You fall quickly and warmly into connection with people you find interesting. Your enthusiasm for people is genuine, and it tends to be felt. You need depth alongside energy — relationships that can hold both the exciting version of you and the quieter one.',
   },
   {
     key: 'ISTJ', typeCode: 'ISTJ', label: 'Grounded Executor',
@@ -921,6 +939,8 @@ export const TYPE_ARCHETYPES: TypeArchetype[] = [
     strengths: ['Follow-through', 'Practical reliability', 'Attention to process'],
     blindSpot: 'Rigidity when a situation calls for improvisation or a change of plan.',
     growthEdge: 'Holding your standards while staying curious about whether the procedure still fits the problem.',
+    workStyle: 'You are most productive in environments with clear expectations, defined processes, and accountability. You do not need inspiration — you need clarity and a system you can trust. You are the person who ensures things actually get done correctly.',
+    relationshipStyle: 'You show love through reliability and action, not through expression. The people close to you know they can count on you — and they are right. You are slower to express emotion verbally, but your commitments are deeply consistent.',
   },
   {
     key: 'ISFJ', typeCode: 'ISFJ', label: 'Quiet Sustainer',
@@ -935,6 +955,8 @@ export const TYPE_ARCHETYPES: TypeArchetype[] = [
     strengths: ['Consistent care', 'Practical attentiveness', 'Quiet dependability'],
     blindSpot: 'Overextending without signaling it, until the cost becomes unavoidable.',
     growthEdge: 'Naming what you need before you\'re already depleted.',
+    workStyle: 'You work best when you understand how your contribution fits into something larger. You are thorough, reliable, and often the person who holds operational details together. Environments that notice consistent quality — rather than just high-profile contribution — are where you thrive.',
+    relationshipStyle: 'You love quietly and deeply. You invest in people over time through memory, attention, and care. Your relationships tend to build steadily — and once built, they last. You may find it easier to give than to ask, which is the growth edge.',
   },
   {
     key: 'ESTJ', typeCode: 'ESTJ', label: 'Reliable Director',
@@ -949,6 +971,8 @@ export const TYPE_ARCHETYPES: TypeArchetype[] = [
     strengths: ['Organizational clarity', 'Accountability', 'Efficient execution'],
     blindSpot: 'Flexibility when the situation has genuinely changed and the old structure no longer fits.',
     growthEdge: 'Distinguishing between standards worth defending and rigidity that serves no one.',
+    workStyle: 'You operate best with clear authority, measurable goals, and a team that follows through on commitments. You create systems and hold people to them — including yourself. You are most valuable in environments that need order and accountability, not just ideas.',
+    relationshipStyle: 'You are more dependable than expressive, and the people close to you often know the difference. Your care is demonstrated through presence, loyalty, and reliability. You may not always say how you feel — but you show up consistently.',
   },
   {
     key: 'ESFJ', typeCode: 'ESFJ', label: 'Warm Organizer',
@@ -963,6 +987,8 @@ export const TYPE_ARCHETYPES: TypeArchetype[] = [
     strengths: ['Relational coordination', 'Warm follow-through', 'Group attentiveness'],
     blindSpot: 'Prioritizing harmony at the cost of honesty when the honest thing would actually help.',
     growthEdge: 'Being direct when care requires it — not just when it\'s comfortable.',
+    workStyle: 'You coordinate people naturally and make systems run through attentiveness and follow-through. You are energised by work that serves others and involves visible human connection. You prefer environments where relationships and results go together.',
+    relationshipStyle: 'Relationships are central to how you experience the world. You invest in the people around you practically and emotionally. You are aware of how everyone is doing, and you take steps to help — sometimes at the cost of your own needs.',
   },
   {
     key: 'ISTP', typeCode: 'ISTP', label: 'Practical Adapter',
@@ -977,6 +1003,8 @@ export const TYPE_ARCHETYPES: TypeArchetype[] = [
     strengths: ['Practical problem-solving', 'Calm under pressure', 'Efficient independence'],
     blindSpot: 'Communicating your process. Others may not know what you\'re doing or why — which can create unnecessary distance.',
     growthEdge: 'Proactively updating others as a tool for building trust, even when it feels unnecessary.',
+    workStyle: 'You solve problems most efficiently when left to work through them in your own way. Micro-management and overexplanation slow you down. You are best placed in roles where practical judgment and hands-on competence are what matter.',
+    relationshipStyle: 'You are more emotionally available than you look, but only with people who give you genuine space. Close relationships are built through shared experience, not conversation. You do not need much — but what you need, you need consistently.',
   },
   {
     key: 'ISFP', typeCode: 'ISFP', label: 'Attentive Realist',
@@ -991,6 +1019,8 @@ export const TYPE_ARCHETYPES: TypeArchetype[] = [
     strengths: ['Sensory attentiveness', 'Values integrity', 'Present-moment focus'],
     blindSpot: 'Asserting what you need before the situation has already moved past the point where it mattered.',
     growthEdge: 'Speaking up earlier when something conflicts with your values — before the cost builds quietly.',
+    workStyle: 'You work best when the work has aesthetic, practical, or human meaning you can feel. Abstract performance metrics disconnected from real output are draining. You need environments where quality and authenticity matter more than appearance.',
+    relationshipStyle: 'You love in a quiet, specific, and often practical way. You notice the small things that matter to people and act on them. You do not need emotional intensity in a relationship — you need authenticity and space.',
   },
   {
     key: 'ESTP', typeCode: 'ESTP', label: 'Direct Initiator',
@@ -1005,6 +1035,8 @@ export const TYPE_ARCHETYPES: TypeArchetype[] = [
     strengths: ['Fast decision-making', 'Practical adaptability', 'High-energy initiative'],
     blindSpot: 'Patience with processes that exist for reasons you haven\'t fully seen yet.',
     growthEdge: 'Slowing down long enough to understand a system before optimizing it.',
+    workStyle: 'You are most effective when there is a real problem to solve, immediate feedback to work with, and room to improvise. Over-process and under-action frustrate you. You thrive in fast-moving environments where results matter more than method.',
+    relationshipStyle: 'You connect quickly and warmly, but the depth of that connection varies. You show care through presence, action, and humor. The people who know you well describe you as more loyal than you might advertise.',
   },
   {
     key: 'ESFP', typeCode: 'ESFP', label: 'Expressive Momentum',
@@ -1019,5 +1051,7 @@ export const TYPE_ARCHETYPES: TypeArchetype[] = [
     strengths: ['Spontaneous warmth', 'Present-moment joy', 'Expressive connection'],
     blindSpot: 'Preparation and forward planning when they would genuinely help.',
     growthEdge: 'Building in enough structure to protect future-you from the decisions present-you makes.',
+    workStyle: 'You are most engaged when the work involves people, variety, and visible results. Repetitive tasks without social contact drain you quickly. You bring warmth and energy to collaborative environments and tend to raise morale without trying.',
+    relationshipStyle: 'You connect fast and genuinely, and you bring joy to the people around you. Sustaining depth through the less exciting phases of a close relationship — the ones that require patience or difficult conversation — is where your relational growth tends to happen.',
   },
 ];
