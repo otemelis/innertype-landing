@@ -28,6 +28,9 @@ export interface CombinedProfile {
   communicationStyle: string;
   stressResponse: string;
   growthEdge: string;
+  thriveConditions: string;
+  whatDrivesYou: string;
+  relationshipGuidance: string;
 }
 
 export const EMPTY_PROFILE: UserProfile = {

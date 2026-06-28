@@ -157,6 +157,9 @@ export function synthesizeProfile(
     communicationStyle,
     stressResponse,
     growthEdge: archetype.growthEdge,
+    thriveConditions: archetype.thriveConditions,
+    whatDrivesYou: archetype.whatDrivesYou,
+    relationshipGuidance: archetype.relationshipGuidance,
   };
 }
 

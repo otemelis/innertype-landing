@@ -585,6 +585,8 @@ export interface CombinedArchetype {
   stressResponse: string;
   growthEdge: string;
   relationshipGuidance: string;
+  thriveConditions: string;
+  whatDrivesYou: string;
 }
 
 export const COMBINED_ARCHETYPES: CombinedArchetype[] = [
@@ -606,6 +608,10 @@ export const COMBINED_ARCHETYPES: CombinedArchetype[] = [
       'Practice letting people see your thinking before it is finished. Sharing your process — even partially, even tentatively — creates connection without requiring full vulnerability. Most people find it more interesting than you expect.',
     relationshipGuidance:
       'You connect best with people who do not require constant proof of your engagement. The invitation, for you, is to let a few people in further than feels strictly necessary — not because you owe it to them, but because it tends to produce the kind of closeness you actually want.',
+    thriveConditions:
+      'Uninterrupted time to think. Work that rewards depth over speed. Relationships where presence does not have to be constant to be real. Environments that notice quality rather than output volume.',
+    whatDrivesYou:
+      'Being in the presence of ideas that genuinely surprise you. The feeling of making something complex precise — whether that is an argument, a system, or an understanding of a person. Knowing, quietly, that you have seen something others have not yet noticed.',
   },
   {
     key: 'CalmArchitect',
@@ -625,6 +631,10 @@ export const COMBINED_ARCHETYPES: CombinedArchetype[] = [
       'Allow more room for the unfinished. Not every situation benefits from a framework. Some of your most useful thinking will come from sitting with uncertainty rather than immediately resolving it.',
     relationshipGuidance:
       'You are a stable and dependable partner. The growth edge is ensuring that your instinct toward solutions does not consistently bypass the emotional conversation. Sometimes what people need is not an answer but a witness.',
+    thriveConditions:
+      'Clear parameters and genuine ownership of your work. Time to plan before committing. Teams that value consistency over urgency. Environments where follow-through is respected as much as ideas.',
+    whatDrivesYou:
+      'Building systems and relationships that actually hold up — not just in ideal conditions, but under pressure. The satisfaction of seeing something you helped design work the way it was meant to. Being the person others can count on to be steady when the situation is not.',
   },
   {
     key: 'PassionateIdealist',
@@ -644,6 +654,10 @@ export const COMBINED_ARCHETYPES: CombinedArchetype[] = [
       'Develop a practice of pausing between the feeling and the response. You lose nothing of your depth by adding a breath between them. The pause is not suppression; it is the difference between expression and communication.',
     relationshipGuidance:
       'You bring real warmth and investment to your relationships. The invitation is to build internal steadiness alongside your expressiveness — not as a replacement for it, but as the ground it can safely emerge from.',
+    thriveConditions:
+      'Work with a clear human purpose. People who meet your emotional investment with their own. Space to process out loud without being rushed toward a conclusion. Environments that value feeling as information, not noise.',
+    whatDrivesYou:
+      'Genuine human connection and the sense that what you are doing actually matters to real people. Work and relationships that carry meaning beyond the surface. The feeling of being fully understood — and of understanding someone else that completely.',
   },
   {
     key: 'GroundedExplorer',
@@ -663,6 +677,10 @@ export const COMBINED_ARCHETYPES: CombinedArchetype[] = [
       'Sit with not knowing occasionally — without reaching for a framework or a plan. Some of your most interesting thinking emerges in the gap between questions, before you have organized them.',
     relationshipGuidance:
       'You are a secure and growth-oriented partner. The invitation is to bring the same curiosity you apply to ideas to understanding how others experience closeness differently than you do.',
+    thriveConditions:
+      'Environments that reward genuine curiosity and growth. Work that evolves rather than repeating itself. Relationships where you can be both settled and exploring simultaneously. Teams that trust their people to figure things out.',
+    whatDrivesYou:
+      'Learning something genuinely new — not for credentials, but because the idea itself is interesting. Growth that is real rather than performed. Contributing to something you believe in, in a way that leaves room for your own curiosity to stay alive.',
   },
   {
     key: 'IndependentConnector',
@@ -682,6 +700,10 @@ export const COMBINED_ARCHETYPES: CombinedArchetype[] = [
       'Give people slightly more access to your inner world than feels strictly necessary. The cost is low. The relational return is often surprisingly large.',
     relationshipGuidance:
       'You offer your partners something real: steadiness, competence, and genuine depth — when they earn it. The invitation is to lower the earning threshold slightly, before people have fully demonstrated they deserve it.',
+    thriveConditions:
+      'Genuine autonomy and clear ownership. Work that rewards consistent quality over social performance. Relationships that do not require constant maintenance to stay real. Space to process privately before being asked to respond.',
+    whatDrivesYou:
+      'Solving something difficult and doing it well, without needing the process to be validated at every step. The quiet satisfaction of quality work. Deep, earned trust with a small number of people who have genuinely proven they deserve access to your inner world.',
   },
   {
     key: 'ExpressiveArchitect',
@@ -701,6 +723,10 @@ export const COMBINED_ARCHETYPES: CombinedArchetype[] = [
       'Develop more comfort with unfinished ideas. Your impulse to complete and structure can occasionally close off directions before they have had time to develop. Holding something open a little longer can change what it eventually becomes.',
     relationshipGuidance:
       'You bring warmth, creativity, and genuine follow-through to relationships. The invitation is to make space for others to define the direction sometimes — not because your direction is wrong, but because shared ownership deepens connection in ways unilateral generosity does not.',
+    thriveConditions:
+      'Roles where you can see both the big picture and the implementation path. Environments that value originality without sacrificing follow-through. Teams that match your energy without requiring you to slow down for bureaucratic reasons. Creative latitude within real constraints.',
+    whatDrivesYou:
+      'Bringing a vision from concept to reality — and bringing others into it with clarity and energy. Work where creativity and execution exist in the same space. The experience of finishing something you built and having it actually work.',
   },
   {
     key: 'SensitiveGuide',
@@ -720,6 +746,10 @@ export const COMBINED_ARCHETYPES: CombinedArchetype[] = [
       'Build a deliberate practice of receiving. Let yourself be known with the same willingness with which you know others. The people who care about you want access to your inner experience, not just your insight.',
     relationshipGuidance:
       'You are a deeply attentive partner. The invitation is to turn some of that attentiveness toward your own needs as clearly as you direct it toward others. Being known is not less valuable than knowing.',
+    thriveConditions:
+      'Work that connects to human outcomes. Relationships where your insight is valued, not just your output. Environments with enough psychological safety that you can say what you actually observe. Time to tune in without constant external demands.',
+    whatDrivesYou:
+      'Seeing someone understand something about themselves that was previously unclear — and knowing you helped create the conditions for that. Relationships and work where your emotional intelligence is genuinely useful, not just decorative. Contributing to something that involves and benefits real people.',
   },
   {
     key: 'AdaptiveRealist',
@@ -739,6 +769,10 @@ export const COMBINED_ARCHETYPES: CombinedArchetype[] = [
       'Lean into something specific — a strength, an interest, a conviction — and develop it beyond balance. Balance is the foundation. Depth is what gets built on top of it.',
     relationshipGuidance:
       'You are an adaptable and stable partner. People trust you. The growth edge is ensuring that your adaptability does not consistently come at the cost of expressing what you actually want and need.',
+    thriveConditions:
+      'Environments that reward versatility and practical judgment. Work with real variety over long periods of repetition. Teams that trust you to adapt without requiring you to justify every decision. Relationships where stability and flexibility coexist without tension.',
+    whatDrivesYou:
+      'Doing work that is genuinely useful in whatever form that takes. The sense of being relied upon across different contexts — not for a narrow specialty, but for sound judgment. Stability with enough variety to keep engagement real.',
   },
 ];
 
