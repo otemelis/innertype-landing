@@ -1,8 +1,9 @@
-import { Question, UserAnswer, AssessmentResult, PersonalityScores, AttachmentScores, CommunicationScores, ConfidenceLevel, AssessmentId } from '../types/assessment';
+import { Question, UserAnswer, AssessmentResult, PersonalityScores, AttachmentScores, CommunicationScores, TypeScores, ConfidenceLevel, AssessmentId } from '../types/assessment';
 import { personalityQuestions } from '../data/questions/personality';
 import { relationshipQuestions } from '../data/questions/relationship';
 import { communicationQuestions } from '../data/questions/communication';
-import { PERSONALITY_ARCHETYPES, RELATIONSHIP_TYPES, COMMUNICATION_TYPES } from '../data/resultTypes';
+import { typeQuestions } from '../data/questions/type';
+import { PERSONALITY_ARCHETYPES, RELATIONSHIP_TYPES, COMMUNICATION_TYPES, TYPE_ARCHETYPES } from '../data/resultTypes';
 import { calculateConfidence } from './confidence';
 
 function scoreValue(rawValue: number, reverse: boolean): number {
@@ -167,14 +168,71 @@ function getCommunicationType(scores: CommunicationScores): string {
   return Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
 }
 
+// ─── Type scoring ─────────────────────────────────────────────────────────────
+
+function scoreType(answers: UserAnswer[]): TypeScores {
+  const axes: Record<string, { total: number; count: number }> = {
+    EI: { total: 0, count: 0 },
+    SN: { total: 0, count: 0 },
+    TF: { total: 0, count: 0 },
+    JP: { total: 0, count: 0 },
+  };
+
+  const answerMap = new Map(answers.map((a) => [a.questionId, a.value]));
+
+  for (const q of typeQuestions) {
+    const raw = answerMap.get(q.id);
+    if (raw == null) continue;
+    const scored = scoreValue(raw, q.reverse);
+    axes[q.dimension].total += scored;
+    axes[q.dimension].count += 1;
+  }
+
+  return {
+    EI: averageToPercent(axes.EI.total, axes.EI.count),
+    SN: averageToPercent(axes.SN.total, axes.SN.count),
+    TF: averageToPercent(axes.TF.total, axes.TF.count),
+    JP: averageToPercent(axes.JP.total, axes.JP.count),
+  };
+}
+
+function getTypeCode(scores: TypeScores): string {
+  const e = scores.EI > 50 ? 'E' : 'I';
+  const n = scores.SN > 50 ? 'N' : 'S';
+  const f = scores.TF > 50 ? 'F' : 'T';
+  const p = scores.JP > 50 ? 'P' : 'J';
+  return `${e}${n}${f}${p}`;
+}
+
 // ─── Master scoring function ──────────────────────────────────────────────────
 
 export function computeResult(
-  assessmentId: AssessmentId,
+  assessmentId: 'type' | 'personality' | 'relationship' | 'communication',
   answers: UserAnswer[]
 ): AssessmentResult {
   const completedAt = new Date().toISOString();
   const confidence = calculateConfidence(answers, assessmentId);
+
+  if (assessmentId === 'type') {
+    const scores = scoreType(answers);
+    const typeCode = getTypeCode(scores);
+    const archetype = TYPE_ARCHETYPES.find((a) => a.key === typeCode) ?? TYPE_ARCHETYPES[0];
+
+    return {
+      assessmentId,
+      completedAt,
+      archetype: archetype.key,
+      archetypeLabel: archetype.label,
+      archetypeTagline: archetype.tagline,
+      scores,
+      primaryType: typeCode,
+      strengths: archetype.strengths,
+      blindSpot: archetype.blindSpot,
+      summary: archetype.description,
+      confidence,
+      answers,
+    };
+  }
 
   if (assessmentId === 'personality') {
     const scores = scorePersonality(answers);
@@ -242,6 +300,7 @@ export function computeResult(
 }
 
 export function getQuestionsForAssessment(id: string): Question[] {
+  if (id === 'type') return typeQuestions;
   if (id === 'personality') return personalityQuestions;
   if (id === 'relationship') return relationshipQuestions;
   if (id === 'communication') return communicationQuestions;
