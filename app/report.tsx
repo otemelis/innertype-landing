@@ -226,18 +226,20 @@ export default function ReportScreen() {
   const heroFade = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    loadProfile().then((p) => {
-      setProfile(p);
-      setIsPremium(p.isPremium);
-      const cp = synthesizeProfile(
-        p.assessmentResults.personality,
-        p.assessmentResults.relationship,
-        p.assessmentResults.communication,
-        (p.assessmentResults as any).type
-      );
-      setCombined(cp);
-      Animated.timing(heroFade, { toValue: 1, duration: 480, delay: 80, useNativeDriver: true }).start();
-    });
+    loadProfile()
+      .then((p) => {
+        setProfile(p);
+        setIsPremium(p.isPremium);
+        const cp = synthesizeProfile(
+          p.assessmentResults.personality,
+          p.assessmentResults.relationship,
+          p.assessmentResults.communication,
+          (p.assessmentResults as any).type
+        );
+        setCombined(cp);
+        Animated.timing(heroFade, { toValue: 1, duration: 480, delay: 80, useNativeDriver: true }).start();
+      })
+      .catch((e) => console.error('[ReportScreen] loadProfile failed:', e));
   }, []);
 
   if (!combined || !profile) {
@@ -1335,7 +1337,8 @@ const styles = StyleSheet.create({
   },
   shareCardFooter: {
     gap: 6,
-    marginTop: 'auto',
+    flex: 1,
+    justifyContent: 'flex-end',
   },
   shareCardDivider: {
     height: 1,
