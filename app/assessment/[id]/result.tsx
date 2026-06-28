@@ -104,6 +104,7 @@ export default function ResultScreen() {
   const [result, setResult] = useState<AssessmentResult | null>(null);
   const [profileClarity, setProfileClarity] = useState(0);
   const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [isPremium, setIsPremium] = useState(false);
 
   const heroFade = useRef(new Animated.Value(0)).current;
   const heroSlide = useRef(new Animated.Value(20)).current;
@@ -116,13 +117,13 @@ export default function ResultScreen() {
     ]).then(([r, p]) => {
       setResult(r);
       setProfile(p);
+      setIsPremium(p?.isPremium ?? false);
       setProfileClarity(calculateProfileClarity(p));
-      // Entrance animation after data loads
       Animated.parallel([
         Animated.timing(heroFade, { toValue: 1, duration: 450, delay: 80, useNativeDriver: true }),
         Animated.spring(heroSlide, { toValue: 0, tension: 80, friction: 14, delay: 80, useNativeDriver: true }),
       ]).start();
-    });
+    }).catch((e) => console.error('[ResultScreen] loadProfile failed:', e));
   }, [id]);
 
   if (!assessment || !result) return null;
@@ -352,51 +353,72 @@ export default function ResultScreen() {
             </View>
           </View>
 
-          {/* ── Premium unlock ── */}
-          <View style={styles.premiumCard}>
-            <LinearGradient
-              colors={['rgba(201,169,110,0.10)', 'rgba(201,169,110,0.03)']}
-              style={StyleSheet.absoluteFill}
-            />
-            <View style={styles.premiumBorder} />
-            <View style={styles.premiumContent}>
-              <View style={styles.premiumRow}>
-                <View style={styles.premiumIconWrap}>
-                  <Ionicons name="star-outline" size={18} color={Colors.gold} />
+          {/* ── Contextual premium card (locked) ── */}
+          {!isPremium && (
+            <View style={styles.premiumCard}>
+              <LinearGradient
+                colors={[`${accentColor}12`, `${accentColor}04`]}
+                style={StyleSheet.absoluteFill}
+              />
+              <View style={[styles.premiumBorder, { borderColor: `${accentColor}30` }]} />
+              <View style={styles.premiumContent}>
+                <View style={[styles.premiumBadge, { backgroundColor: `${accentColor}18` }]}>
+                  <Ionicons name="star-outline" size={11} color={accentColor} />
+                  <Text style={[styles.premiumBadgeText, { color: accentColor }]}>✦ DEEP REPORT</Text>
                 </View>
-                <View style={{ flex: 1, gap: 2 }}>
-                  <Text style={styles.premiumTitle}>Unlock your full InnerType report</Text>
-                  <Text style={styles.premiumSubtitle}>Full interpretation · Practical guidance</Text>
+
+                <Text style={styles.premiumTitle}>
+                  {id === 'type' && 'Go deeper into your Personality Type'}
+                  {id === 'personality' && 'Go deeper into your trait profile'}
+                  {id === 'relationship' && 'Go deeper into your relationship pattern'}
+                  {id === 'communication' && 'Go deeper into your communication style'}
+                </Text>
+
+                <Text style={styles.premiumSubtitle}>
+                  {id === 'type' && 'Unlock your full type report — plus all deep reports and your complete InnerType synthesis.'}
+                  {id === 'personality' && 'Unlock deeper guidance for your core tendencies — plus all other reports.'}
+                  {id === 'relationship' && 'Unlock deeper insight into how you connect, protect yourself, and build trust.'}
+                  {id === 'communication' && 'Unlock deeper guidance for conflict, boundaries, and repair — plus all other reports.'}
+                </Text>
+
+                <View style={styles.premiumFeatures}>
+                  {(id === 'type'
+                    ? ['Full type interpretation', 'Work style', 'How you connect', 'Growth guidance', 'Share card preview']
+                    : id === 'personality'
+                    ? ['Highest & lowest traits', 'Strengths', 'Stress patterns', 'Work style', 'Growth guidance']
+                    : id === 'relationship'
+                    ? ['How trust builds', 'What creates distance', 'Closeness needs', 'Strengths', 'Growth guidance']
+                    : ['Conflict style', 'Boundary style', 'Repair style', 'Work & team style', 'Growth guidance']
+                  ).map((f) => (
+                    <View key={f} style={styles.featureRow}>
+                      <Ionicons name="checkmark" size={12} color={accentColor} />
+                      <Text style={styles.featureText}>{f}</Text>
+                    </View>
+                  ))}
                 </View>
+
+                <Text style={styles.premiumNudge}>
+                  Also unlocks all other deep reports + full InnerType report
+                </Text>
+
+                <TouchableOpacity
+                  onPress={() => router.push('/paywall')}
+                  style={styles.unlockBtn}
+                  activeOpacity={0.85}
+                >
+                  <LinearGradient
+                    colors={Colors.gradientGold}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    style={[StyleSheet.absoluteFill, { borderRadius: 14 }]}
+                  />
+                  <Text style={styles.unlockBtnText}>Unlock InnerType Premium · €4.99</Text>
+                </TouchableOpacity>
+
+                <Text style={styles.premiumMeta}>One-time unlock · No subscription.</Text>
               </View>
-              <View style={styles.premiumFeatures}>
-                {[
-                  'Relationship guidance for your type',
-                  'Work style & decision-making',
-                  'Stress patterns & recovery',
-                  'Combined profile with all assessments',
-                ].map((f) => (
-                  <View key={f} style={styles.featureRow}>
-                    <Ionicons name="chevron-forward" size={12} color={Colors.gold} />
-                    <Text style={styles.featureText}>{f}</Text>
-                  </View>
-                ))}
-              </View>
-              <TouchableOpacity
-                onPress={() => router.push('/paywall')}
-                style={styles.unlockBtn}
-                activeOpacity={0.85}
-              >
-                <LinearGradient
-                  colors={Colors.gradientGold}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 0 }}
-                  style={[StyleSheet.absoluteFill, { borderRadius: 14 }]}
-                />
-                <Text style={styles.unlockBtnText}>Unlock Full Report · from €4.99</Text>
-              </TouchableOpacity>
             </View>
-          </View>
+          )}
 
           {/* ── Actions ── */}
           <View style={styles.actionsRow}>
@@ -670,7 +692,7 @@ const styles = StyleSheet.create({
     lineHeight: FontSize.base * 1.65,
   },
 
-  // ── Premium ──
+  // ── Contextual premium card ──
   premiumCard: {
     borderRadius: 20,
     overflow: 'hidden',
@@ -680,34 +702,36 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFill,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: `${Colors.gold}30`,
   },
   premiumContent: {
     padding: 20,
-    gap: 16,
+    gap: 14,
     zIndex: 1,
   },
-  premiumRow: {
+  premiumBadge: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
-    gap: 12,
-  },
-  premiumIconWrap: {
-    width: 40,
-    height: 40,
-    borderRadius: 10,
-    backgroundColor: Colors.goldDim,
     alignItems: 'center',
-    justifyContent: 'center',
+    gap: 5,
+    alignSelf: 'flex-start',
+    paddingHorizontal: 9,
+    paddingVertical: 4,
+    borderRadius: 20,
+  },
+  premiumBadgeText: {
+    fontSize: 9,
+    fontWeight: FontWeight.bold,
+    letterSpacing: 1.5,
   },
   premiumTitle: {
-    fontSize: FontSize.base,
+    fontSize: FontSize.lg,
     fontWeight: FontWeight.semiBold,
     color: Colors.textPrimary,
+    lineHeight: FontSize.lg * 1.3,
   },
   premiumSubtitle: {
     fontSize: FontSize.sm,
-    color: Colors.textTertiary,
+    color: Colors.textSecondary,
+    lineHeight: FontSize.sm * 1.6,
   },
   premiumFeatures: { gap: 8 },
   featureRow: {
@@ -719,19 +743,28 @@ const styles = StyleSheet.create({
     fontSize: FontSize.sm,
     color: Colors.textSecondary,
   },
+  premiumNudge: {
+    fontSize: FontSize.xs,
+    color: Colors.textTertiary,
+    fontStyle: 'italic',
+  },
   unlockBtn: {
     height: 50,
     borderRadius: 14,
     overflow: 'hidden',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 4,
   },
   unlockBtnText: {
     fontSize: FontSize.base,
     fontWeight: FontWeight.bold,
     color: Colors.textInverse,
     letterSpacing: 0.3,
+  },
+  premiumMeta: {
+    fontSize: FontSize.xs,
+    color: Colors.textTertiary,
+    textAlign: 'center',
   },
 
   // ── Actions ──
