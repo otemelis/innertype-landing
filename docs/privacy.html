@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="InnerType Privacy Policy — your data stays on your device, always.">
+  <title>Privacy Policy — InnerType</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:    #09090E;
+      --bg2:   #10101A;
+      --text:  #F2EDE4;
+      --text2: #9E9898;
+      --text3: #6A6470;
+      --gold:  #C9A96E;
+      --ivory: #DDD3BE;
+      --bord:  rgba(255,255,255,0.09);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Nav ───────────────────────── */
+    nav {
+      padding: 20px 48px; border-bottom: 1px solid var(--bord);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 20px; color: var(--ivory); text-decoration: none;
+    }
+    .nav-back {
+      font-size: 13px; color: var(--text3); text-decoration: none;
+      display: flex; align-items: center; gap: 7px; transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--text2); }
+
+    /* ── Content ───────────────────── */
+    main {
+      max-width: 720px; margin: 0 auto;
+      padding: 72px 48px 96px;
+    }
+
+    .doc-eyebrow {
+      font-size: 10.5px; font-weight: 600; letter-spacing: 2.8px;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 18px;
+    }
+
+    .doc-title {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(36px, 5vw, 52px); font-weight: 400;
+      line-height: 1.08; letter-spacing: -0.8px; color: var(--text);
+      margin-bottom: 14px;
+    }
+
+    .doc-meta {
+      font-size: 13px; color: var(--text3); margin-bottom: 56px;
+      padding-bottom: 40px; border-bottom: 1px solid var(--bord);
+    }
+
+    /* Summary box */
+    .summary-box {
+      background: rgba(201,169,110,0.06);
+      border: 1px solid rgba(201,169,110,0.18);
+      border-radius: 14px;
+      padding: 28px 32px;
+      margin-bottom: 52px;
+    }
+    .summary-box h2 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 20px; font-weight: 400; color: var(--ivory);
+      margin-bottom: 14px;
+    }
+    .summary-box ul {
+      list-style: none; display: flex; flex-direction: column; gap: 10px;
+    }
+    .summary-box li {
+      font-size: 14px; font-weight: 300; color: var(--text2);
+      line-height: 1.6; display: flex; gap: 10px; align-items: flex-start;
+    }
+    .summary-box li::before {
+      content: '✓'; color: var(--gold); font-weight: 500; flex-shrink: 0; margin-top: 1px;
+    }
+
+    /* Body sections */
+    .doc-sec { margin-bottom: 48px; }
+
+    .doc-sec h2 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 22px; font-weight: 400; color: var(--text);
+      margin-bottom: 14px; padding-top: 8px;
+    }
+
+    .doc-sec p {
+      font-size: 15px; font-weight: 300; line-height: 1.82; color: var(--text2);
+      margin-bottom: 14px;
+    }
+    .doc-sec p:last-child { margin-bottom: 0; }
+
+    .doc-sec ul {
+      margin: 12px 0 14px 0; padding-left: 0; list-style: none;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .doc-sec li {
+      font-size: 15px; font-weight: 300; line-height: 1.7; color: var(--text2);
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .doc-sec li::before {
+      content: '—'; color: var(--text3); flex-shrink: 0;
+    }
+
+    .doc-sec a { color: var(--gold); text-underline-offset: 3px; }
+
+    hr.sec-rule {
+      border: none; border-top: 1px solid var(--bord); margin-bottom: 48px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 24px 48px; border-top: 1px solid var(--bord);
+      display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    }
+    .foot-logo { font-family: 'DM Serif Display', Georgia, serif; font-size: 17px; color: var(--text3); }
+    .foot-links a { font-size: 13px; color: var(--text3); text-decoration: none; transition: color 0.2s; }
+    .foot-links a:hover { color: var(--text2); }
+    .foot-copy { font-size: 12px; color: var(--text3); }
+
+    @media (max-width: 640px) {
+      nav { padding: 16px 24px; }
+      main { padding: 48px 24px 72px; }
+      footer { padding: 20px 24px; }
+      .summary-box { padding: 20px 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">InnerType</a>
+  <a href="index.html" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Back to home
+  </a>
+</nav>
+
+<main>
+
+  <div class="doc-eyebrow">Legal</div>
+  <h1 class="doc-title">Privacy Policy</h1>
+  <p class="doc-meta">Effective date: 1 July 2025 &nbsp;·&nbsp; InnerType for iOS</p>
+
+  <!-- Plain-language summary -->
+  <div class="summary-box">
+    <h2>The short version</h2>
+    <ul>
+      <li>Everything you enter stays on your device. Nothing is sent to any server.</li>
+      <li>InnerType has no account system. We cannot identify you.</li>
+      <li>We collect no analytics, no crash reports, no usage data.</li>
+      <li>We serve no ads and never will.</li>
+      <li>The only payment data involved in a purchase is handled entirely by Apple.</li>
+    </ul>
+  </div>
+
+  <hr class="sec-rule">
+
+  <div class="doc-sec">
+    <h2>1. What we collect</h2>
+    <p>Nothing. InnerType does not collect, store, transmit, or process any personal data on any server we operate or control.</p>
+    <p>All data generated by the app — your name (if you choose to enter one), assessment answers, results, profile scores, and settings — is stored exclusively in your device's local storage using Apple's standard <code>AsyncStorage</code> mechanism. It never leaves your device unless you explicitly share something using your device's own share sheet.</p>
+  </div>
+
+  <div class="doc-sec">
+    <h2>2. No account, no identity</h2>
+    <p>InnerType requires no account, no login, and no email address. We have no mechanism to identify who you are, and we do not want one. You are anonymous to us by design.</p>
+  </div>
+
+  <div class="doc-sec">
+    <h2>3. Analytics and crash reporting</h2>
+    <p>We do not use any analytics SDK, crash reporting tool, or event-tracking library. We have no visibility into how you use the app, how often you open it, or what features you use.</p>
+    <p>Apple may collect aggregated, anonymized App Store metrics (such as download counts and crash rate summaries) through standard developer dashboards. This data is governed by Apple's privacy policy, not ours, and cannot be traced back to individual users.</p>
+  </div>
+
+  <div class="doc-sec">
+    <h2>4. In-app purchases</h2>
+    <p>If you choose to unlock InnerType Premium, the purchase is processed entirely by Apple through StoreKit. We do not see, store, or handle your payment information. The only confirmation we receive from Apple is whether the purchase was completed — no financial details are shared with us.</p>
+    <p>Your payment data is subject to <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple's Privacy Policy</a>.</p>
+  </div>
+
+  <div class="doc-sec">
+    <h2>5. Sharing your results</h2>
+    <p>InnerType includes an optional feature to share your assessment result as an image or text. If you use it:</p>
+    <ul>
+      <li>On iOS, sharing uses the native iOS share sheet. The app does not send anything to our servers.</li>
+      <li>Where you share (a messaging app, social platform, etc.) is your choice. That destination's own privacy policy governs what happens once you share.</li>
+    </ul>
+    <p>Sharing is always optional and always initiated by you.</p>
+  </div>
+
+  <div class="doc-sec">
+    <h2>6. Third-party services</h2>
+    <p>InnerType does not integrate with any third-party advertising networks, data brokers, or social login providers. The app contains no trackers.</p>
+    <p>The only third-party involvement is Apple's App Store infrastructure for distribution and payment processing, and Apple's standard iOS frameworks used by the app. These are governed by Apple's policies.</p>
+  </div>
+
+  <div class="doc-sec">
+    <h2>7. Children's privacy</h2>
+    <p>InnerType is not directed at children under 13. Because we collect no personal data from anyone, we have no data about children to manage. If you are a parent or guardian with concerns, please contact us.</p>
+  </div>
+
+  <div class="doc-sec">
+    <h2>8. Data deletion</h2>
+    <p>Since all your data is stored locally on your device, you control it entirely. To delete everything:</p>
+    <ul>
+      <li>Open InnerType → Settings → Reset all data. This clears all stored data from your device immediately and permanently.</li>
+      <li>Alternatively, uninstalling the app removes all local data.</li>
+    </ul>
+    <p>There is no data on our side to request deletion of, because we never received any.</p>
+  </div>
+
+  <div class="doc-sec">
+    <h2>9. Changes to this policy</h2>
+    <p>If we ever introduce features that involve data collection, this policy will be updated and the effective date changed. We will provide notice within the app before any material change takes effect. The current version will always be available at this URL.</p>
+  </div>
+
+  <div class="doc-sec">
+    <h2>10. Contact</h2>
+    <p>Questions about this policy? Reach us at <a href="mailto:privacy@innertype.app">privacy@innertype.app</a>.</p>
+    <p>We are a small, independent team. We read every message.</p>
+  </div>
+
+</main>
+
+<footer>
+  <span class="foot-logo">InnerType</span>
+  <nav class="foot-links" aria-label="Footer links">
+    <a href="index.html">Home</a>
+  </nav>
+  <span class="foot-copy">© 2025 InnerType</span>
+</footer>
+
+</body>
+</html>
